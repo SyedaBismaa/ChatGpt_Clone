@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const userModel = require('../models/user.models')
 const aiService = require('../services/ai.services')
 const messageModel = require('../models/message.models')
-
+const {createMemory , queryMemory} = require('../services/vector.services')
 
 
 function initSocketServer(httpServer) {
@@ -46,10 +46,21 @@ function initSocketServer(httpServer) {
                 role: "user"
             })
 
+            //long-term-memory
+             const vectors = await aiService.generateVector(messagePayload.content)
+             //saved in vector database pinecone
+             await createMemory({
+                vectors,
+                messageId:"46879998",
+                metadata:{
+                    chat:messagePayload.chat,
+                    user:socket.user._id
+                }
+             })
+             
+
 
             const chatHistory = (await messageModel.find({ chat: messagePayload.chat }).sort({ createdAt: -1 }).limit(20).lean()).reverse();
-
-
 
             const response = await aiService.generateResponse(chatHistory.map(item => {
                 return {
