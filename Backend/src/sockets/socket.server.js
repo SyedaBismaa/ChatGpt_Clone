@@ -8,7 +8,15 @@ const { createMemory, queryMemory } = require('../services/vector.services')
 
 function initSocketServer(httpServer) {
 
-    const io = new Server(httpServer, {});
+        const io = new Server(httpServer, {
+        cors: {
+            origin: "http://localhost:5173",
+            allowedHeaders: [ "Content-Type", "Authorization" ],
+            credentials: true
+        }
+    })
+
+    // const io = new Server(httpServer, {});
 
     io.use(async (socket, next) => {
 
@@ -100,17 +108,7 @@ function initSocketServer(httpServer) {
 
             const response = await aiService.generateResponse([...ltm, ...stm])
 
-            /*
-            const responseMessage = await messageModel.create({
-                chat: messagePayload.chat,
-                user: socket.user._id,
-                content: response,
-                role: "model"
-            })
-
-            const responseVectors = await aiService.generateVector(response)
-
-             */
+    
 
              socket.emit('ai-response', {
                 content: response,

@@ -1,42 +1,190 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+@import url('./styles/theme.css');
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  color-scheme: light dark;
+  /* hint native UI */
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Layout helpers */
+.center-min-h-screen {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6) var(--space-4);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: clamp(var(--space-5), 5vw, var(--space-8));
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.auth-header {
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.auth-header h1 {
+  margin: 0 0 var(--space-2);
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-semibold);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.auth-sub {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+form.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+form.auth-form .field-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+form.auth-form label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+form.auth-form input {
+  font: inherit;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+form.auth-form input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--color-focus-ring);
+  background: var(--color-bg);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-4);
+  width: 100%;
+}
+
+form.auth-form .field-group input {
+  width: 100%;
+}
+
+/* Ensure long placeholder / values don't overflow */
+.auth-card input {
+  min-width: 0;
+}
+
+/* Tighten vertical rhythm slightly on narrow screens */
+@media (max-width: 380px) {
+  .auth-card {
+    padding: var(--space-6) var(--space-5);
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 520px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+button.primary-btn {
+  appearance: none;
+  cursor: pointer;
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+  font: inherit;
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.card {
-  padding: 2em;
+button.primary-btn:hover {
+  background: var(--color-primary-hover);
 }
 
-.read-the-docs {
-  color: #888;
+button.primary-btn:focus {
+  outline: none;
+  box-shadow: var(--color-focus-ring);
+}
+
+button.primary-btn:active {
+  transform: translateY(1px);
+}
+
+button.primary-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.auth-alt {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.auth-alt a {
+  font-weight: var(--font-weight-medium);
+}
+
+/* Theme toggle removed since system preference is used */
+
+/* Smooth theme transition */
+html {
+  transition: background-color .3s, color .3s;
+}
+
+body,
+.auth-card,
+input,
+button {
+  transition: background-color .3s, color .3s, border-color .3s;
 }
