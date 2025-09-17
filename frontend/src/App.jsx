@@ -1,13 +1,13 @@
 
-
 import './App.css'
+import AppRoutes from './AppRoutes'
 
 function App() {
 
 
   return (
     <>
-       <h1>Hello World</h1>
+     <AppRoutes/>
     </>
   )
 }
