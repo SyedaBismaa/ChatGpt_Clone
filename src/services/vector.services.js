@@ -1,33 +1,33 @@
 // Import the Pinecone library
-const{ Pinecone } = require('@pinecone-database/pinecone');
+const { Pinecone } = require('@pinecone-database/pinecone');
 
 // Initialize a Pinecone client with your API key
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY });
 
 const convoFlowGptIndex = pc.index('convoflow-gpt')
 
-async function createMemory ({vectors, metadata , messageId}){
+async function createMemory({ vectors, metadata, messageId }) {
 
-    await convoFlowGptIndex.upsert([ {
-        id:messageId,
-        values:vectors,
+    await convoFlowGptIndex.upsert([{
+        id: messageId,
+        values: vectors,
         metadata
 
-    } ])
+    }])
 }
 
 
-async function queryMemory({ queryVector, limit=5 , metadata}){
+async function queryMemory({ queryVector, limit = 5, metadata }) {
 
     const data = await convoFlowGptIndex.query({
-        vector:queryVector,
-        topK:limit,
-        filter:metadata? {metadata} : undefined,
-        includeMetadata:true
+        vector: queryVector,
+        topK: limit,
+        filter: metadata ? metadata : undefined,
+        includeMetadata: true
     })
     return data.matches
 }
 
 
 
-module.exports = {createMemory , queryMemory}
+module.exports = { createMemory, queryMemory }
