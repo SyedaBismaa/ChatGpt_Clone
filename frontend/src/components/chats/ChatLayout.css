@@ -1,4 +1,4 @@
-/* Base layout */
+`/* Base layout */
 .chat-layout {
     display: flex;
     height: 100dvh;
@@ -91,6 +91,7 @@
 .chat-layout.minimal .chat-list-item {
     background: #15151f;
     border-color: #26263a;
+    margin-top: 0.6rem;
 }
 
 .chat-layout.minimal .chat-list-item:hover {

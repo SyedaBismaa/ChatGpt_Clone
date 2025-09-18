@@ -104,7 +104,7 @@ const Home = () => {
 
    const response = await  axios.get(`http://localhost:3000/api/chat/messages/${chatId}`, { withCredentials: true })
 
-  //  console.log("Fetched messages:", response.data.messages);
+   console.log("Fetched messages:", response.data.messages);
 
    setMessages(response.data.messages.map(m => ({
      type: m.role === 'user' ? 'user' : 'ai',
@@ -134,7 +134,7 @@ return (
     <main className="chat-main" role="main">
       {messages.length === 0 && (
         <div className="chat-welcome" aria-hidden="true">
-          {/* <div className="chip">Early Preview</div> */}
+          <div className="chip">Early Preview</div>
           <h1>Konvox ━ Your AI homie</h1>
           <p>Ask anything. Paste text, brainstorm ideas, or get quick explanations. Your chats stay in the sidebar so you can pick up where you left off.</p>
         </div>
