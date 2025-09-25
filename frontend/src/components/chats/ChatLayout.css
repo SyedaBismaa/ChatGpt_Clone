@@ -1,9 +1,10 @@
-`/* Base layout */
+/* Base layout */
 .chat-layout {
     display: flex;
     height: 100dvh;
     background: var(--color-bg);
     font-size: var(--text-base);
+    flex-direction: column; /* default mobile */
 }
 
 .chat-main {
@@ -11,26 +12,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100dvh;
+    height: 100%;
     padding-top: calc(52px + env(safe-area-inset-top, 0));
     position: relative;
 }
 
-@media (min-width: 960px) {
-    .chat-main {
-        padding-top: 0;
-    }
-}
-
+/* Desktop layout */
 @media (min-width: 960px) {
     .chat-layout {
         flex-direction: row;
     }
-}
-
-@media (max-width: 959px) {
-    .chat-layout {
-        flex-direction: column;
+    .chat-main {
+        padding-top: 0;
     }
 }
 
@@ -43,9 +36,7 @@
     --color-text: #e8e8f5;
     --color-text-muted: #888ca6;
     --color-accent: #4dd2ff; /* Neon Cyan */
-}
 
-.chat-layout.minimal {
     background: linear-gradient(180deg, #0a0a0f 0%, #15151f 60%, #12121a 100%);
     color: var(--color-text);
 }
@@ -54,19 +45,10 @@
     background: transparent;
 }
 
+/* Top & Sidebar */
 .chat-layout.minimal .chat-mobile-bar {
     background: #0d0d14;
     border-color: #1f1f2a;
-}
-
-.chat-layout.minimal .chat-icon-btn {
-    background: #15151f;
-    border-color: #2a2a3d;
-    color: var(--color-text);
-}
-
-.chat-layout.minimal .chat-icon-btn:hover {
-    background: #1d1d29;
 }
 
 .chat-layout.minimal .chat-sidebar {
@@ -78,9 +60,21 @@
     border-color: #1f1f2a;
 }
 
+/* Buttons */
+.chat-layout.minimal .chat-icon-btn,
+.chat-layout.minimal .small-btn {
+    background: #15151f;
+    border: 1px solid #2a2a3d;
+    color: var(--color-text);
+    transition: background 0.2s ease;
+}
+
+.chat-layout.minimal .chat-icon-btn:hover {
+    background: #1d1d29;
+}
+
 .chat-layout.minimal .small-btn {
     background: #191926;
-    border-color: #2a2a3d;
     color: #cfd3f3;
 }
 
@@ -88,10 +82,12 @@
     background: #232336;
 }
 
+/* Chat List */
 .chat-layout.minimal .chat-list-item {
     background: #15151f;
-    border-color: #26263a;
+    border: 1px solid #26263a;
     margin-top: 0.6rem;
+    transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .chat-layout.minimal .chat-list-item:hover {
@@ -103,9 +99,10 @@
     box-shadow: 0 0 0 1px var(--color-accent);
 }
 
+/* Messages */
 .chat-layout.minimal .msg-bubble {
     background: #15151f;
-    border-color: #2a2a3d;
+    border: 1px solid #2a2a3d;
     color: var(--color-text);
 }
 
@@ -166,7 +163,7 @@
     color: #c0c3e8;
 }
 
-/* Scrollbar minimal styling (webkit) */
+/* Scrollbar minimal styling (webkit only) */
 .chat-layout.minimal .messages::-webkit-scrollbar {
     width: 10px;
 }
@@ -178,6 +175,7 @@
 .chat-layout.minimal .messages::-webkit-scrollbar-thumb {
     background: #2a2a3d;
     border-radius: 6px;
+    transition: background 0.2s ease;
 }
 
 .chat-layout.minimal .messages::-webkit-scrollbar-thumb:hover {
