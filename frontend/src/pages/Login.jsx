@@ -19,9 +19,9 @@ const Login = () => {
         setSubmitting(true);
 
 
-        console.log(form);
 
-        axios.post("http://localhost:3000/api/auth/login", {
+
+        axios.post("https://chatgpt-clone-mar3.onrender.com/api/auth/login", {
             email: form.email,
             password: form.password
         },
