@@ -3,14 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Register = () => {
-    const [ form, setForm ] = useState({ email: '', firstname: '', lastname: '', password: '' });
-    const [ submitting, setSubmitting ] = useState(false);
+    const [form, setForm] = useState({ email: '', firstname: '', lastname: '', password: '' });
+    const [submitting, setSubmitting] = useState(false);
     const navigate = useNavigate();
 
 
     function handleChange(e) {
         const { name, value } = e.target;
-        setForm(f => ({ ...f, [ name ]: value }));
+        setForm(f => ({ ...f, [name]: value }));
     }
 
     async function handleSubmit(e) {
@@ -18,7 +18,7 @@ const Register = () => {
         setSubmitting(true);
         console.log(form);
 
-        axios.post("https://chatgpt-clone-mar3.onrender.com/api/auth/register", {
+        axios.post("https://chatgpt-clone-1-zq3j.onrender.com/api/auth/register", {
             email: form.email,
             fullName: {
                 firstName: form.firstname,

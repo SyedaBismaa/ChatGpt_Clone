@@ -16,7 +16,7 @@ import {
   setChats
 } from '../store/chatSlice.js';
 
-const BACKEND_URL = "https://chatgpt-clone-mar3.onrender.com";
+const BACKEND_URL = "https://chatgpt-clone-1-zq3j.onrender.com";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -189,8 +189,8 @@ const Home = () => {
           <div className="chat-welcome" aria-hidden="true">
             <div className="chip">Early Preview</div>
             <h1>Konvox ━ Your AI homie</h1>
-            <p>Ask anything. Paste text, brainstorm ideas, or get quick explanations. 
-               Your chats stay in the sidebar so you can pick up where you left off.</p>
+            <p>Ask anything. Paste text, brainstorm ideas, or get quick explanations.
+              Your chats stay in the sidebar so you can pick up where you left off.</p>
           </div>
         )}
         <ChatMessages messages={messages} isSending={isSending} />
