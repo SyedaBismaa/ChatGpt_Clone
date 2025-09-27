@@ -19,7 +19,7 @@ const Login = () => {
         setSubmitting(true);
 
 
-        axios.post("https://chatgpt-clone-1-zq3j.onrender.com/api/auth/login", {
+        axios.post("https://chatgpt-clone-2-pqtt.onrender.com/api/auth/login", {
             email: form.email,
             password: form.password
         },

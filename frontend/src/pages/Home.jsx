@@ -16,7 +16,7 @@ import {
   setChats
 } from '../store/chatSlice.js';
 
-const BACKEND_URL = "https://chatgpt-clone-1-zq3j.onrender.com";
+const BACKEND_URL = "https://chatgpt-clone-2-pqtt.onrender.com";
 
 const Home = () => {
   const dispatch = useDispatch();
