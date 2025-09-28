@@ -1,7 +1,11 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 // helpers
-const createEmptyChat = (title) => ({ id: nanoid(), title: title || 'New Chat', messages: [] });
+const createEmptyChat = (title) => ({ 
+    id: nanoid(), 
+    title: title || 'New Chat', 
+    messages: [] 
+});
 
 const chatSlice = createSlice({
     name: 'chat',
@@ -21,8 +25,14 @@ const chatSlice = createSlice({
         },
         startNewChat: {
             reducer(state, action) {
+                // FIXED: Normalize backend _id to id for consistency
                 const { _id, title } = action.payload;
-                state.chats.unshift({ _id, title: title || 'New Chat', messages: [] });
+                const newChat = { 
+                    id: _id,  // Use _id from backend as id
+                    title: title || 'New Chat', 
+                    messages: [] 
+                };
+                state.chats.unshift(newChat);
                 state.activeChatId = _id;
             }
         },
@@ -39,7 +49,16 @@ const chatSlice = createSlice({
             state.isSending = false;
         },
         setChats(state, action) {
-            state.chats = action.payload;
+            // FIXED: Normalize all chats to use 'id' consistently
+            state.chats = action.payload.map(chat => ({
+                ...chat,
+                id: chat._id || chat.id  // Use _id from backend as id
+            }));
+            
+            // Set first chat as active if none is selected
+            if (state.chats.length > 0 && !state.activeChatId) {
+                state.activeChatId = state.chats[0].id;
+            }
         },
         addUserMessage: {
             reducer(state, action) {
@@ -52,7 +71,17 @@ const chatSlice = createSlice({
                 chat.messages.push(message);
             },
             prepare(chatId, content) {
-                return { payload: { chatId, message: { id: nanoid(), role: 'user', content, ts: Date.now() } } };
+                return { 
+                    payload: { 
+                        chatId, 
+                        message: { 
+                            id: nanoid(), 
+                            role: 'user', 
+                            content, 
+                            ts: Date.now() 
+                        } 
+                    } 
+                };
             }
         },
         addAIMessage: {
@@ -63,7 +92,18 @@ const chatSlice = createSlice({
                 chat.messages.push(message);
             },
             prepare(chatId, content, error = false) {
-                return { payload: { chatId, message: { id: nanoid(), role: 'ai', content, ts: Date.now(), ...(error ? { error: true } : {}) } } };
+                return { 
+                    payload: { 
+                        chatId, 
+                        message: { 
+                            id: nanoid(), 
+                            role: 'ai', 
+                            content, 
+                            ts: Date.now(), 
+                            ...(error ? { error: true } : {}) 
+                        } 
+                    } 
+                };
             }
         }
     }
