@@ -17,7 +17,7 @@ app.use(cookieParser())
 app.use(cors({
   origin: [
     "http://localhost:5173",    // Your dev frontend
-    "https://chat-gpt-clone-eta-silk.vercel.app/"    // If you ever use HTTPS locally
+    "https://chat-gpt-clone-eta-silk.vercel.app"    // If you ever use HTTPS locally
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,              // This enables cookies
