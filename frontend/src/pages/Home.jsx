@@ -195,22 +195,21 @@ const Home = () => {
   };
 
   // Show login prompt if not authenticated
-  if (isLoggedIn === false) {
-    return (
-      <div className="chat-layout minimal">
-        <div className="auth-required">
-          <h2>Authentication Required</h2>
-          <p>You need to be logged in to access the chat.</p>
-          <button 
-            onClick={() => window.location.href = '/login'}
-            className="btn-primary"
-          >
-            Go to Login
-          </button>
-        </div>
-      </div>
-    );
-  }
+// 🔹 Top-right login status indicator
+const LoginStatus = () => (
+  <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '0.5rem' }}>
+    <button
+      className="small-btn"
+      onClick={() => {
+        if (!isLoggedIn) window.location.href = '/login';
+      }}
+    >
+      {isLoggedIn ? "✅ Logged In" : "❌ Login"}
+    </button>
+  </div>
+);
+
+
 
   return (
     <div className="chat-layout minimal">
@@ -218,6 +217,7 @@ const Home = () => {
         onToggleSidebar={() => setSidebarOpen(o => !o)}
         onNewChat={handleNewChat}
       />
+      
       <ChatSidebar
         chats={chats}
         activeChatId={activeChatId}
@@ -229,11 +229,15 @@ const Home = () => {
         onNewChat={handleNewChat}
         open={sidebarOpen}
       />
+        {/* 🔹 Always visible status indicator */}
+  
       <main className="chat-main" role="main">
+         <LoginStatus />
         {messages.length === 0 && isLoggedIn && (
           <div className="chat-welcome" aria-hidden="true">
-            <div className="chip">Early Preview</div>
-            <h1>ChatGPT Clone</h1>
+           
+            {/* <div className="chip">Early Preview</div> */}
+            <h1>Konvox ━ Your Ai homie</h1>
             <p>Ask anything. Paste text, brainstorm ideas, or get quick explanations. Your chats stay in the sidebar so you can pick up where you left off.</p>
           </div>
         )}
