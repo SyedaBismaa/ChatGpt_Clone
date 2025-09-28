@@ -1,11 +1,8 @@
 const userModel= require('../models/user.models')
-const bcrypt=require('bcryptjs'); //hash password
-const jwt = require('jsonwebtoken'); //authenticate after hash password
-
-
+const bcrypt=require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 //register controller
-
 async function registerUser(req,res) {
     
     const {fullName:{firstName,lastName},email,password} = req.body;
@@ -15,7 +12,6 @@ async function registerUser(req,res) {
     if(isUserAlreadyExist){
         return res.status(400).json({message:"User Already Exist"})
     }
-
 
     const hashPassword = await bcrypt.hash(password,10);
 
@@ -27,9 +23,16 @@ async function registerUser(req,res) {
         password:hashPassword,
     })
 
-    const token = jwt.sign({  id:user._id}, process.env.JWT_SECRET)
+    const token = jwt.sign({id:user._id}, process.env.JWT_SECRET)
 
-    res.cookie("token",token);
+    // FIXED: Cookie settings for cross-origin requests
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,           // Required for cross-origin with sameSite: 'none'
+        sameSite: 'none',       // Allow cross-origin cookies
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+        path: '/'               // Make sure cookie is available site-wide
+    });
 
     res.status(201).json({
         message:"user registered successfully!",
@@ -40,7 +43,6 @@ async function registerUser(req,res) {
         }
     })
 }
-
 
 async function loginUser(req,res){
     const { email, password} = req.body;
@@ -61,15 +63,17 @@ async function loginUser(req,res){
 
     const token = jwt.sign({id:user._id},process.env.JWT_SECRET)
 
-    res.cookie("token",token,{
-         httpOnly: true,
-       secure: false,    // important for localhost
-       sameSite: 'lax'
+    // FIXED: Cookie settings for cross-origin requests
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,           // Required for cross-origin with sameSite: 'none'
+        sameSite: 'none',       // Allow cross-origin cookies
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+        path: '/'               // Make sure cookie is available site-wide
     });
 
     res.status(200).json({message:"User LoggedIn successfully!"})
 }
-
 
 module.exports={
     registerUser,
