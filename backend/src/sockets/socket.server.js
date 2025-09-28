@@ -10,7 +10,7 @@ function initSocketServer(httpServer) {
 
     const io = new Server(httpServer, {
         cors: {
-            origin: "http://localhost:5173",
+            origin: "https://chat-gpt-clone-eta-silk.vercel.app",
             allowedHeaders: ["Content-Type", "Authorization"],
             credentials: true
         }
