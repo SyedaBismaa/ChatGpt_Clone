@@ -51,7 +51,7 @@ Follow these steps to run the project locally! 👇
 
 - Node.js and npm installed  
 - Git installed  
-- OpenAI API key  
+- Gemini API key  
 - MongoDB connection string  
 
 ### 1️⃣ Clone the Repository
