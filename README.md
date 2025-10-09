@@ -1,8 +1,8 @@
 # 🤖 Konvox - GPT Clone
 
-A full-stack AI chat application built by **Bismah**, inspired by ChatGPT — featuring real-time conversations, text-to-speech support, responsive UI, and a seamless AI-powered chat experience.  
+A full-stack AI chat application built by **Syeda Bismah**, inspired by ChatGPT — featuring real-time conversations, text-to-speech support, responsive UI, and a seamless AI-powered chat experience.  
 
-🔗 **Live Demo:** [Konvox - Try it here](https://lnkd.in/gjg7fXA5)
+🔗 **Live Demo:** [Konvox - Try it here](https://chat-gpt-clone-eta-silk.vercel.app/)
 
 ---
 
@@ -31,7 +31,6 @@ The app mimics conversational intelligence and UI flow like ChatGPT — but with
 **Frontend:**  
 - React.js  
 - Tailwind CSS  
-- Axios  
 
 **Backend:**  
 - Node.js  
@@ -71,9 +70,9 @@ npm install
 
 ### 3️⃣ Set Up Environment Variables
 ##### Create a .env file in the backend folder and add the following:
-##### OPENAI_API_KEY=your_openai_api_key
-##### MONGO_URI=your_mongo_connection_string
-##### PORT=5000
+###### OPENAI_API_KEY=your_openai_api_key
+###### MONGO_URI=your_mongo_connection_string
+###### PORT=5000
 
 ### 4️⃣ Run the App
 
@@ -86,4 +85,45 @@ cd ../frontend
 npm run dev
 
 ### Your app should now be live at http://localhost:5173 🎉
+
+
+---
+
+## 🧩 API Endpoints
+
+| Method  | Endpoint                  | Description           |
+|---------|---------------------------|---------------------|
+| POST    | `/api/chat`               | Send message to AI   |
+| GET     | `/api/chat/messages/:chatId` | Get chat history  |
+| DELETE  | `/api/chat/:chatId`       | Delete a conversation|
+
+---
+
+## 📸 Demo Preview
+
+🎯 **Live Demo:** [Click to Try Konvox](https://chat-gpt-clone-eta-silk.vercel.app/)
+
+---
+
+## 💡 Future Enhancements
+
+- 🧬 Multi-user authentication  
+- 🗂️ Save and organize chats  
+- 🌈 Custom themes and voices  
+- 📲 PWA version for mobile devices  
+
+---
+
+## 👩‍💻 Creator
+
+**Konvox** — an AI project by **Syeda Bismah**  
+
+> “Built with ❤️, caffeine, and a touch of curiosity.”
+
+🔗 [LinkedIn Demo Link](https://www.linkedin.com/posts/syeda-bisma-29202428a_ai-mern-geminiai-activity-7378023986015715328-JFIg?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEYgXo4BAjXFP33vgZfKoVRMGfAD-sZmXFE)
+
+---
+
+
+⭐ **If you like this project, don’t forget to star the repo!** ⭐
 
